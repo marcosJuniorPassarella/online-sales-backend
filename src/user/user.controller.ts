@@ -9,6 +9,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserEntity } from './entities/user.entity';
+import { ReturnUserDto } from './dtos/returnUser.dto';
 
 @Controller('user')
 export class UserController {
@@ -23,7 +24,9 @@ export class UserController {
   }
 
   @Get()
-  public async getAllUsers(): Promise<Array<UserEntity>> {
-    return this.userService.getAllUsers();
+  public async getAllUsers(): Promise<Array<ReturnUserDto>> {
+    return (await this.userService.getAllUsers()).map(
+      (userEntity) => new ReturnUserDto(userEntity),
+    );
   }
 }

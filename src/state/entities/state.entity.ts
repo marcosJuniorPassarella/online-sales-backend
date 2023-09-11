@@ -1,9 +1,8 @@
-import { CityEntity } from 'src/city/entities/city.entity';
+import { CityEntity } from '../../city/entities/city.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -17,6 +16,9 @@ export class StateEntity {
   @Column({ name: 'name', nullable: false })
   name: string;
 
+  @Column({ name: 'uf', nullable: false })
+  uf: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
@@ -24,5 +26,5 @@ export class StateEntity {
   updatedAt: Date;
 
   @OneToMany(() => CityEntity, (city) => city.state)
-  cities?: Array<CityEntity>;
+  cities?: CityEntity[];
 }

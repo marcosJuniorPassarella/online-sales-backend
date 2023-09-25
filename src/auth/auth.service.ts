@@ -26,6 +26,9 @@ export class AuthService {
       throw new NotFoundException('Email or password invalid');
     }
 
+    console.log('ORIGINAL', new LoginPayload(user));
+    console.log('WITH SPREAD', { ...new LoginPayload(user) });
+
     return {
       accessToken: this.jwtService.sign({ ...new LoginPayload(user) }),
       user: new ReturnUserDto(user),
